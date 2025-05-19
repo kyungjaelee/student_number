@@ -64,6 +64,9 @@ if __name__ == "__main__":
     agent = Agent(state_dim=state_dim, action_dim=action_dim)
     history = {'Epoch': [], 'AvgReturn': []}
 
+    best_return = -float('inf')
+    best_model = None
+
     for epoch in range(1, num_epochs + 1):
         agent.train_epoch(parallel_env, epoch_steps)
 
@@ -72,6 +75,12 @@ if __name__ == "__main__":
             history['Epoch'].append(epoch)
             history['AvgReturn'].append(avg_return)
             print(f"[Epoch {epoch}] Total Steps: {agent.total_steps} | Eval Score: {avg_return}")
+            
+            # === Save the best model ===
+            if avg_return > best_return:
+                best_return = avg_return
+                best_model = agent.network.state_dict()
+                print(f">>> New best model saved with return {best_return:.2f} at epoch {epoch}")
 
     # === Plot and Save Learning Curve ===
     plt.figure(figsize=(6, 4))
@@ -84,8 +93,10 @@ if __name__ == "__main__":
     plt.savefig("training_curve.png")
     plt.close()
 
-    # === Record and Save Best of 10 Videos ===
+    # === Record and Save Best of 10 Videos === memory issue?
     print("Recording 10 runs and saving the best one...")
+    agent.network.load_state_dict(best_model)
+    agent.network.eval()
     best_score = -float('inf')
     best_frames = None
     best_seed = None
