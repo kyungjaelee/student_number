@@ -1,6 +1,8 @@
 model save / check point 제출
 config 수정
 model.py
+train.py -> 학생들이 학습 시키는
+test.py -> 
 
 # 🏎️ CarRacing-v3 Agent with Deep Q-Learning
 
