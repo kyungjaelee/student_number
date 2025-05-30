@@ -23,7 +23,7 @@ class EpsilonGreedy(ExplorationStrategy):
         self.epsilon = max(self.epsilon - self.epsilon_decay, self.epsilon_min)
 
 class SoftmaxExploration(ExplorationStrategy):
-    def __init__(self, temperature=1.0, temperature_min=0.1, decay_steps=1e5):
+    def __init__(self, action_dim, temperature=1.0, temperature_min=0.1, decay_steps=1e5):
         self.temperature = temperature
         self.temperature_min = temperature_min
         self.temperature_decay = (temperature - temperature_min) / decay_steps
