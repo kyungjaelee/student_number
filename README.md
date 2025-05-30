@@ -1,9 +1,3 @@
-model save / check point 제출
-config 수정
-model.py
-train.py -> 학생들이 학습 시키는
-test.py -> 
-
 # 🏎️ CarRacing-v3 Agent with Deep Q-Learning
 
 This project implements a Deep Q-Network (DQN) agent to solve the [CarRacing-v3](https://www.gymlibrary.dev/environments/box2d/car_racing/) environment from Gymnasium. The agent learns from pixel observations using frame stacking, reward clipping, experience replay, and softmax or epsilon-greedy exploration strategies.
